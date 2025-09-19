@@ -22,7 +22,6 @@ return {
   { "lewis6991/gitsigns.nvim" },
 
   -- filer
-  -- { "nvim-tree/nvim-tree.lua" },
   {
     "nvim-tree/nvim-tree.lua",
     dependencies = {

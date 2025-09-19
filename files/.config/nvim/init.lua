@@ -1,12 +1,9 @@
--- ==============================
--- 基本設定
--- ==============================
-require("config.options")   -- vim.opt 系
-require("config.cmd")       -- vim.cmd 系
-require("config.keymaps")   -- キーマップ
+require("config.options")
+require("config.cmd")
+require("config.keymaps")
 
 -- ==============================
--- プラグイン管理 (lazy.nvim)
+-- plugin manager
 -- ==============================
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -24,7 +21,7 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup("plugins")
 
 -- ==============================
--- LSP / 補完など
+-- LSP, complimation, etc
 -- ==============================
 require("config.lsp")
 require("config.cmp")
