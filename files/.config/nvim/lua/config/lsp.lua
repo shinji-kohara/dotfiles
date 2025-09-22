@@ -1,18 +1,37 @@
 -- lua/config/lsp.lua
-local lspconfig = require("lspconfig")
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
-
 require("mason").setup()
 require("mason-lspconfig").setup {
   ensure_installed = { "pyright" },
 }
 
-lspconfig.pyright.setup {
-  capabilities = capabilities,
+vim.lsp.config.pyright = {
+  cmd = { 'pyright-langserver', '--stdio' },
+  filetypes = { 'python' },
+  root_markers = { 'pyproject.toml', 'setup.py', 'setup.cfg', 'requirements.txt', 'Pipfile' },
+  settings = {
+    python = {
+      analysis = {
+        typeCheckingMode = "basic"
+      }
+    }
+  }
 }
 
-require("lspconfig").dartls.setup({
-  cmd = { "dart", "language-server", "--protocol=lsp" },
-  filetypes = { "dart" },
-  root_dir = require("lspconfig").util.root_pattern("pubspec.yaml"),
-})
+vim.lsp.config.dartls = {
+  cmd = { 'dart', 'language-server', '--protocol=lsp' },
+  filetypes = { 'dart' },
+  root_markers = { 'pubspec.yaml', '.git' },
+  settings = {
+    dart = {
+      completeFunctionCalls = true,
+      showTodos = true
+    }
+  },
+  init_option = {
+    onlyAnalyzeProjectsWithOpenFiles = true,
+    suggestFromUnimportedLibraries = true,
+    closingLabels = true
+  }
+}
+
+vim.lsp.enable('dartls')
